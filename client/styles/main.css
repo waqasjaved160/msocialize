@@ -1,0 +1,29 @@
+html, body, .fullheight {
+   height: 100%;
+}
+body {
+  overflow:hidden;
+}
+
+.people-tabs-height {
+  height: calc(100% - 16px);
+}
+
+.fixed-bottom {
+    width: 100%;
+    bottom: 0;
+    /*position: fixed;*/
+}
+
+.img-small {
+    width: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+
+.selected-button {
+    background-color: rgba(158, 158, 158, 0.2);
+}

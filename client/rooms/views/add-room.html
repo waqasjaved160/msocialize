@@ -1,0 +1,34 @@
+<md-dialog style="min-width: 600px;">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2> Create a new room</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:300px;max-width:800px;max-height:810px; ">
+            <div ng-show="true">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="room.name" id="nameInput" type="text" aria-label="Name">
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <input ng-model="room.description" id="description" type="text" aria-label="Description">
+                </md-input-container>
+                <md-checkbox ng-model="room.isPublic" id="public" aria-label="Public">
+                    Public
+                </md-checkbox>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                Close
+            </md-button>
+            <md-button ng-click="addRoom()" style="margin-right:20px;">
+                Add
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

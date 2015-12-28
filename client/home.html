@@ -1,0 +1,127 @@
+<div class="fullheight" id="reportapp" layout="column" layout-fill="">
+    <section class="fullheight" layout="row">
+        <md-sidenav class="fullheight md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <md-content style="height: 100%; overflow-y: auto;" ng-controller="PeopleCtrl">
+                <md-toolbar md-scroll-shrink>
+                    <h1 class="md-toolbar-tools">
+                        <!--<md-button ng-click="peopleClose()" show-lt-md hide-gt-md aria-label="Menu">-->
+                            <!--<md-icon md-svg-src="navigation:ic_menu_24px"></md-icon>-->
+                        <!--</md-button>-->
+                    </h1>
+                </md-toolbar>
+                <div flex layout="column" style="overflow: auto;">
+                    <md-content>
+                        <md-content class="md-padding">
+                            <md-input-container class="sidebar-left-search" style="width: 100%">
+                                <label for="searchReports">Search</label>
+                                <input id="searchReports" type="text" ng-model="searchReports">
+                            </md-input-container>
+                        </md-content>
+                        <md-content>
+                            <md-tabs md-dynamic-height md-border-bottom>
+                                <md-tab label="People">
+                                    <md-content class="md-padding">
+                                        <md-list>
+                                            <md-item ng-repeat="room in rooms">
+                                                <md-item-content>
+                                                    <md-button layout-fill ng-click="openRoom(room._id)" class="sidenav-report-link md-primary">
+                                                        <div layout="column" layout-align="center start">
+                                                            <div ng-model="selectedPerson" class="list-inline">
+                                                                <img ng-src="{{imagePath}}?{{$index}}" class="img-responsive img-circle" style="float: left;width: 30px;margin-top:5px;margin-left:5px" alt="">
+                                                                <p style="margin-left: 40px;">{{ room.name }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </md-button>
+                                                </md-item-content>
+                                            </md-item>
+                                        </md-list>
+                                    </md-content>
+
+                                </md-tab>
+                                <md-tab label="Rooms" ng-click="initialize()">
+                                    <md-content class="md-padding">
+                                        <md-list>
+                                            <md-item ng-repeat="room in rooms">
+                                                <md-item-content>
+                                                    <md-button layout-fill ng-click="openRoom(room._id);toggleActive(room)" ng-class="table_class" class="sidenav-report-link md-primary">
+                                                        <div layout="column" layout-align="center start">
+                                                            <div ng-model="selectedPerson" class="list-inline">
+                                                                <img ng-src="{{imagePath}}?{{$index}}" class="img-responsive img-circle" style="float: left;width: 30px;margin-top:5px;margin-left:5px" alt="">
+                                                                <p style="margin-left: 40px;">{{ room.name }}</p>
+                                                            </div>
+                                                            <!--<div layout="row" layout-fill class="report-meta-data">-->
+                                                                <!--<div layout="column" layout-align="center start" flex="50">-->
+                                                                    <!--<div>{{ room.user_created.first_name }} {{room.user_created.last_name }}</div>-->
+                                                                <!--</div>-->
+                                                                <!--<div layout="column" layout-align="center end" flex="50">-->
+                                                                    <!--<div>{{ room.createdAt }}</div>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </md-button>
+                                                </md-item-content>
+                                            </md-item>
+                                        </md-list>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+
+                        </md-content>
+                    </md-content>
+                    <md-button class="md-fab md-fab-bottom-right md-mini md-accent" ng-click="showAdvanced()" aria-label="Add">
+                        <md-icon md-svg-src="content:ic_add_24px"></md-icon>
+                    </md-button>
+                    <!--<md-content>-->
+                        <!--<md-button class="md-fab md-primary">-->
+                            <!--<md-icon md-svg-icon="content:ic_send_24px"></md-icon>-->
+                        <!--</md-button>-->
+                    <!--</md-content>-->
+                </div>
+            </md-content>
+
+        </md-sidenav>
+        <div class="fullheight" flex="">
+            <div style="height: calc(100% - 100px);overflow-y:auto">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">
+                        <md-button ng-click="peopleOpen()" hide-gt-md aria-label="Menu">
+                            <md-icon md-svg-src="navigation:ic_menu_24px"></md-icon>
+                        </md-button>
+                        <span flex=""></span>
+                    </h1>
+                </md-toolbar>
+                <md-content style="overflow-y: auto;" class="report-tabs-height">
+                    <div flex="100" flex-sm="100" flex-xs="100" layout="column">
+                        <md-card>
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-repeat="item in messages">
+                                    <md-icon class="md-avatar" hide-sm md-svg-icon="image:ic_looks_3_24px"></md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3>{{item.owner}}</h3>
+                                        <h4>{{item.createdAt}}</h4>
+                                        <p>{{item.text}}</p>
+                                    </div>
+                                    <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
+                                    <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </md-card>
+                    </div>
+                </md-content>
+            </div>
+            <footer>
+                <div flex="">
+                    <md-content>
+                        <md-input-container class="fixed-bottom">
+                            <label for="sendMessage">Message</label>
+                            <input id="sendMessage" style="width: 85%" type="text" ng-model="message.text">
+                            <md-button ng-click="sendMessage()" class="md-fab md-primary">
+                                <md-icon md-svg-icon="content:ic_send_24px"></md-icon>
+                            </md-button>
+                        </md-input-container>
+                    </md-content>
+                </div>
+            </footer>
+        </div>
+    </section>
+</div>
