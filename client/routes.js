@@ -29,7 +29,19 @@ angular.module('socialize').config(function ($urlRouterProvider, $stateProvider,
             url: '/rooms/:roomId',
             templateUrl: 'client/rooms/views/rooms-details.html',
             //controller: 'RoomDetailsCtrl'
+        })
+        .state('login', {
+            url: '/login',
+            template: '<login></login>'
         });
+        //.state('register', {
+        //    url: '/register',
+        //    template: '<register></register>'
+        //})
+        //.state('resetpw', {
+        //    url: '/resetpw',
+        //    template: '<resetpw></resetpw>'
+        //});
 
     $urlRouterProvider.otherwise("/index");
 });
